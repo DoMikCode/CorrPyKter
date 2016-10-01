@@ -3,7 +3,7 @@ from window import *
 import sys
 import os
 
-def corrupt(in_file, out_file, corruptionMethod, settings, start_byte=10000, end_byte=100, interval=300,
+def corrupt(in_file, out_file, corruptionMethod, settings, start_byte=13011, end_byte=100, interval=5000,
             autoend=True, overwrite=True):
     temp_file = open(in_file, "rb")
     original = temp_file.read()
@@ -17,7 +17,7 @@ def corrupt(in_file, out_file, corruptionMethod, settings, start_byte=10000, end
         temp_file.close()
 
 #corrupt("in.txt", "out.txt", ReplaceMethod, [int("0x61", 16), int("0x67", 16)])
-corrupt("in.jpg", "out.jpg", AddMethod, [int("0xE0", 16)])
+corrupt("in.jpg", "out.jpg", XorMethod, [10])
 
 # if __name__ == '__main__':
 #     app = QApplication(sys.argv)

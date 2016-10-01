@@ -27,3 +27,34 @@ class AddMethod(CorruptionMethod):
         elif byte + settings[0] < 0: return 255 + byte + settings[0]
         else: return byte + settings[0]
 
+class XorMethod(CorruptionMethod):
+    def change(self, byte, settings):
+        return byte ^ settings[0]
+
+class SwapMethod(CorruptionMethod):
+    def corrupt(self, byte_array, settings):
+        new_byte_array = bytearray(byte_array)
+        oldi = -1
+        amount = settings[1]
+        for byte in range(self.start_byte, self.end_byte, self.interval):
+            if amount > 0:
+                new = new_byte_array[byte:byte+settings[0]]
+                newi = byte
+                if oldi >= 0:
+                    temp = old
+                    new_byte_array[oldi:oldi+settings[0]] = new
+                    new_byte_array[newi:newi+settings[0]] = temp
+                old = new
+                oldi = newi
+                amount -= 1
+        return bytes(new_byte_array)
+
+class ReverseMethod(CorruptionMethod):
+    def corrupt(self, byte_array, settings):
+        new_byte_array = bytearray(byte_array)
+        amount = settings[1]
+        for byte in range(self.start_byte, self.end_byte, self.interval):
+            if amount > 0:
+                new_byte_array[byte:byte+settings[0]] = new_byte_array[byte:byte+settings[0]][::-1]
+                amount -= 1
+        return bytes(new_byte_array)
