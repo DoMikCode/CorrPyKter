@@ -17,6 +17,13 @@ class CorruptionMethod:
 
 class ReplaceMethod(CorruptionMethod):
     def change(self, byte, settings):
-        if byte == settings['byte_a']:
-            byte = settings['byte_b']
+        if byte == settings[0]:
+            byte = settings[1]
         return byte
+
+class AddMethod(CorruptionMethod):
+    def change(self, byte, settings):
+        if byte + settings[0] > 255: return byte + settings[0] - 255
+        elif byte + settings[0] < 0: return 255 + byte + settings[0]
+        else: return byte + settings[0]
+
