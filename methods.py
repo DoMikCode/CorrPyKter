@@ -47,6 +47,7 @@ class SwapMethod(CorruptionMethod):
                 old = new
                 oldi = newi
                 amount -= 1
+
         return bytes(new_byte_array)
 
 class ReverseMethod(CorruptionMethod):

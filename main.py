@@ -19,7 +19,7 @@ def corrupt(in_file, out_file, corruptionMethod, settings, start_byte=13011, end
 #corrupt("in.txt", "out.txt", ReplaceMethod, [int("0x61", 16), int("0x67", 16)])
 corrupt("in.jpg", "out.jpg", XorMethod, [10])
 
-# if __name__ == '__main__':
-#     app = QApplication(sys.argv)
-#     mw = MainWindow()
-#     sys.exit(app.exec_())
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    mw = MainWindow()
+    sys.exit(app.exec_())
