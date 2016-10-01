@@ -8,12 +8,10 @@ def corrupt(in_file, out_file, corruptionMethod, overwrite=True):
     temp_file = open(in_file, "rb")
     original = temp_file.read()
     temp_file.close()
-    print(original)
-    corr =  corruptionMethod(1, 100, 3)
-    print(corr.corrupt(original, byte_a=bytes('a', 'utf-8'), byte_b=b'c'))
+    corr = corruptionMethod(0, 100, 3)
     if overwrite:
         temp_file = open(out_file, "wb")
-        #out_file = temp_file.write()
+        out_file = temp_file.write(corr.corrupt(original, byte_a=int("0x61", 16), byte_b=int("0x67", 16)))
         temp_file.close()
 
 corrupt("in.txt", "out.txt", ReplaceMethod)

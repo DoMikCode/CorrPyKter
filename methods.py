@@ -5,7 +5,7 @@ class CorruptionMethod:
         self.interval = interval
 
     def corrupt(self, byte_array, **kwargs):
-        new_byte_array = bytearray(byte_array, 'utf-8')
+        new_byte_array = bytearray(byte_array)
         for byte in range(self.start_byte, self.end_byte, self.interval):
             n = self.change(new_byte_array[byte], **kwargs)
             new_byte_array[byte] = n
@@ -17,7 +17,6 @@ class CorruptionMethod:
 
 class ReplaceMethod(CorruptionMethod):
     def change(self, byte, **kwargs):
-        print(byte, kwargs['byte_a'])
         if byte == kwargs['byte_a']:
             byte = kwargs['byte_b']
         return byte
